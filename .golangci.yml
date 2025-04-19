@@ -1,0 +1,83 @@
+# Refer to golangci-lint's example config file for more options and information:
+# https://github.com/golangci/golangci-lint/blob/master/.golangci.reference.yml
+
+run:
+  timeout: 5m
+  modules-download-mode: readonly
+
+linters:
+  enable:
+    - errcheck
+    - goimports
+    - govet
+    - staticcheck
+    - gocognit
+    - funlen
+    - cyclop
+    - gosec
+    - nestif
+    - maintidx
+    - godox
+    - decorder
+linters-settings:
+  copyloopvar:
+    # Check all assigning the loop variable to another variable.
+    # Default: false
+    check-alias: true
+
+  cyclop:
+    # The maximal code complexity to report.
+    # Default: 10
+    max-complexity: 12
+    # The maximal average package complexity.
+    # If it's higher than 0.0 (float) the check is enabled
+    # Default: 0.0
+    package-average: 11
+    # Should ignore tests.
+    # Default: false
+    skip-tests: true
+  funlen:
+    # Checks the number of lines in a function.
+    # If lower than 0, disable the check.
+    # Default: 60
+    lines: 60
+    # Checks the number of statements in a function.
+    # If lower than 0, disable the check.
+    # Default: 40
+    statements: 40
+    # Ignore comments when counting lines.
+    # Default false
+    ignore-comments: true
+  # 代码复杂度检查
+  gocognit:
+    # Minimal code complexity to report.
+    # Default: 30 (but we recommend 10-20)
+    min-complexity: 10
+  decorder:
+    # 声名顺序
+    dec-order:
+      - type
+      - const
+      - var
+      - func
+  godox:
+    # Report any comments starting with keywords, this is useful for TODO or FIXME comments that
+    # might be left in the code accidentally and should be resolved before merging.
+    # Default: ["TODO", "BUG", "FIXME"]
+    keywords:
+      - NOTE
+      - OPTIMIZE # marks code that should be optimized before merging
+      - HACK # marks hack-around that should be removed before merging
+  maintidx:
+    # Show functions with maintainability index lower than N.
+    # A high index indicates better maintainability (it's kind of the opposite of complexity).
+    # Default: 20
+    under: 30
+  nestif:
+    # Minimal complexity of if statements to report.
+    # Default: 5
+    min-complexity: 3
+issues:
+  exclude-use-default: false
+  max-issues-per-linter: 0
+  max-same-issues: 0
